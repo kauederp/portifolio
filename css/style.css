@@ -1,0 +1,72 @@
+html,
+body {
+    height: 100vh;
+}
+
+header {
+    background-image: linear-gradient(to right top, #23ff28, #00f99a, #00ede0, #00dcff, #00c6ff, #3dc4fd, #56c1fb, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+
+}
+
+#fotoPerfil {
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    animation: grow 1s normal;
+}
+
+#fotoPerfil:hover {
+    filter: drop-shadow(0px 0px 2px #000);
+}
+
+.listas {
+    max-height: 200px !important;
+}
+
+
+#content-sobre {
+    animation: slideLeft 1s normal;
+}
+
+
+@keyframes slideLeft {
+    from {
+
+        opacity: 0%;
+        margin-left: -50px;
+        z-index: 99;
+    }
+}
+
+@keyframes grow {
+    from {
+        transform: scale(1.2);
+    }
+}
+
+#desc {
+    position: absolute;
+    width: calc(8.33%*9);
+    max-width: 500px;
+    margin-left: 60px;
+    z-index: 999;
+    filter: drop-shadow(5px -5px 5px rgba(0, 0, 0, 0.473));
+}
+
+#content-sobre {
+    height: 105vh;
+}
+
+@media(min-width:576px) {
+    #desc {
+        margin-left: 0px;
+    }
+
+    #content-sobre {
+        height: 110vh;
+    }
+}
+
+.linksNav a:hover {
+    color: black !important;
+    border-bottom: 2px solid black;
+}

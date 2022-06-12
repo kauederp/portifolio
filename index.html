@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="container-fluid p-0 m-0">
+    <div id="app">
+        <header>
+            <ul class="d-none d-block py-1 py-sm-3 col-12 d-sm-flex flex-sm-row list-group-none justify-content-center ">
+                <li class="linksNav mx-2 list-group-item list-none fw-bold"><a class="text-decoration-none text-light text-capitalize" target="_blank" href=" https://github.com/kauederp">Git</a></li>
+                <li class="linksNav mx-2 list-group-item list-none fw-bold"><a class="text-decoration-none text-light text-capitalize linkHeader" v-on:click="changeContent()" href="#">My Contacts</a></li>
+            </ul>
+            <div class="d-flex d-sm-none text-center justify-content-center align-items-center flex-row">
+                <div class="linksNav mx-2 fw-bold"><a class="text-decoration-none text-light text-capitalize" target="_blank" href=" https://github.com/kauederp">Git</a></div>
+                <div class="linksNav mx-2 fw-bold"><a class="text-decoration-none text-light text-capitalize linkHeader" v-on:click="changeContent()" href="#">My Contacts</a></div>
+            </div>
+        </header>
+        <main class="mt-4 ">
+            <div id="content-sobre">
+                <div class="d-flex flex-row justify-content-evenly">
+                    <div>
+                        <h1 class="text-center">Kauê Delgado Pereira</h1>
+                        <div class="ms-5">
+                            <p>Nacionality: <span v-bind:title="nacionality">🇧🇷</span></p>
+                            <div class="d-block d-sm-none col-2">
+                                <img class="col-12" id="fotoPerfil" src="imgs/perfil.jpg" alt="foto_de_perfil">
+                            </div>
+                            <p class="fw-bold">Acting Capabilities:</p>
+                            <ul class="listas d-flex  flex-column flex-wrap">
+                                <ComponentMainCapacidades v-for="capacidade in capacidades" v-bind:capacidade="capacidade" />
+                            </ul>
+                            <p class="fw-bold">Knowledge:</p>
+                            <ul class="listas d-flex  flex-column flex-wrap">
+                                <ComponentMainConhecimentos v-for="conhecimento in conhecimentos" v-bind:conhecimento="conhecimento" />
+                            </ul>
+
+                        </div>
+                        <div id="desc" class="rounded col-11 col-sm-4 p-2 bg-dark text-light">
+                            <p>Hi, My name is Kauê and I'm a junior fullstack programmer. I started my career right after entering a technical school, where I was able to learn the basics of web development. The basics are never enough for me, I sought to study tools that would increase my productivity and space in the market, such as: Laravel, VueJs, SASS and Bootstrap. I am able to work and learn from new challenges and experiences.</p>
+                        </div>
+                    </div>
+                    <div class="d-none d-sm-block col-2">
+                        <img class="col-12" id="fotoPerfil" src="imgs/perfil.jpg" alt="foto_de_perfil">
+                    </div>
+
+                </div>
+            </div>
+            <div id="content-contatos" class="ms-sm-5 px-2 ps-sm-5 d-none">
+                <h1>Contacts</h1>
+                <ul class="listas d-flex  flex-column flex-wrap">
+                    <ComponentMainContatos v-for="contato in contatos" v-bind:contato="contato" :id="'li-contatos-'+contato.id" />
+                </ul>
+            </div>
+        </main>
+        <footer class="bg-dark text-light bg-opacity-75 position fixed-bottom text-center"> Kauê Delgado &copy; <span id="year"></span></footer>
+    </div>
+
+
+    <script>
+        Vue.component('componentmaincapacidades', {
+            props: ['capacidade'],
+            template: '<li class="text-capitalize" >{{capacidade.text}}</li>'
+        })
+        Vue.component('componentmainconhecimentos', {
+            props: ['conhecimento'],
+            template: '<li class="text-capitalize" >{{conhecimento.text}}</li>'
+        })
+        Vue.component('componentmaincontatos', {
+            props: ['contato'],
+            template: '<li>{{contato.text}}</li>'
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                changeContent: () => {
+                    var link = document.getElementsByClassName('linkHeader')
+                    var sobre = document.getElementById('content-sobre')
+                    var contatos = document.getElementById('content-contatos')
+                    if (!sobre.classList.contains('d-none')) {
+                        sobre.classList.add('d-none')
+                        contatos.classList.remove('d-none')
+                        link[0].innerText = "My CV"
+                        link[1].innerText = "My CV"
+                    } else {
+                        sobre.classList.remove('d-none')
+                        contatos.classList.add('d-none')
+                        link[0].innerText = "My Contacts"
+                        link[1].innerText = "My Contacts"
+                    }
+                },
+                capacidades: [{
+                    id: 1,
+                    text: 'fullstack'
+                }, {
+                    id: 2,
+                    text: 'backend'
+                }, {
+                    id: 3,
+                    text: 'frontend'
+                }],
+                conhecimentos: [{
+                        id: 1,
+                        text: 'JavaScript'
+                    }, {
+                        id: 2,
+                        text: 'Bootstrap'
+                    }, {
+                        id: 3,
+                        text: 'CSS3'
+                    }, {
+                        id: 4,
+                        text: 'SASS'
+                    }, {
+                        id: 5,
+                        text: 'PHP'
+                    }, {
+                        id: 6,
+                        text: 'Lua'
+                    }, {
+                        id: 7,
+                        text: 'C'
+                    },
+                    {
+                        id: 8,
+                        text: 'C++'
+                    },
+                    {
+                        id: 9,
+                        text: 'SSH'
+                    },
+                    {
+                        id: 10,
+                        text: 'Linux'
+                    },
+                    {
+                        id: 11,
+                        text: 'Laravel'
+                    },
+                    {
+                        id: 12,
+                        text: 'Adobe Photoshop'
+                    },
+                    {
+                        id: 13,
+                        text: 'AdobeXD'
+                    },
+                    {
+                        id: 14,
+                        text: 'CorelDraw'
+                    },
+                    {
+                        id: 15,
+                        text: 'VueJs'
+                    }
+
+                ],
+                nacionality: "Brazil, South America",
+                contatos: [{
+                    id: 1,
+                    text: 'Cell and Whatsapp : +55 51 995978589'
+                }, {
+                    id: 2,
+                    text: 'Email: kauederp@gmail.com'
+                }, {
+                    id: 3,
+                    text: ''
+                }]
+            }
+        })
+    </script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
